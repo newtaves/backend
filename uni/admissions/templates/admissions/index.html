@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>University Admission Portal</title>
+        <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f0f2f5; margin:0px}
+        .hero { background-color: #003366; color: white; padding: 50px; }
+        .btn { background-color: #ffcc00; color: #333; padding: 15px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; }
+        </style>
+    </head>
+    <body>
+        {% block content %}
+        <div class="hero">
+        <h1>Welcome to University of Delhi </h1>
+        <p>Your journey to success begins here.</p>
+        <br>
+        <a href="{% url 'apply' %}" class="btn">Apply for Admission</a>
+        </div>
+        {% endblock %}
+    </body>
+</html>
