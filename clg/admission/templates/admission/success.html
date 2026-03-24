@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Success - UniPortal{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 4rem auto; text-align: center;">
+    <div class="card">
+        <div class="stats-icon" style="margin: 0 auto 1.5rem; width: 4rem; height: 4rem; background-color: #dcfce7; color: var(--success);">
+            <svg style="width: 2.5rem; height: 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+        <h2 style="margin-bottom: 1rem;">Application Submitted!</h2>
+        <p style="color: var(--text-sub); margin-bottom: 2rem;">Thank you, <strong>{{ name }}</strong>. Your application has been received and is being processed by our team. We will contact you via email shortly.</p>
+        <a href="{% url 'admission:index' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

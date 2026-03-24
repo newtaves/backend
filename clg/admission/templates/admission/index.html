@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - UniPortal{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Shape Your Future at UniPortal</h1>
+    <p>Join our community of innovators, leaders, and thinkers. Start your journey with us today through our streamlined admission process.</p>
+    <div>
+        <a href="{% url 'admission:apply' %}" class="btn btn-primary" style="font-size: 1.25rem; padding: 1rem 2.5rem;">Begin Your Application</a>
+    </div>
+</section>
+
+<section class="grid grid-3">
+    <div class="card">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Academic Excellence</h3>
+        <p style="color: var(--text-sub);">Learn from world-class faculty and engage in cutting-edge research across diverse departments.</p>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Global Community</h3>
+        <p style="color: var(--text-sub);">Connect with students from over 50 countries and build a lasting professional network.</p>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Career Support</h3>
+        <p style="color: var(--text-sub);">Get dedicated career coaching and access to exclusive internship opportunities with top partners.</p>
+    </div>
+</section>
+{% endblock %}

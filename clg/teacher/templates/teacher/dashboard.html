@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Teacher Panel - UniPortal{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 2rem;">
+    <h1 style="font-size: 2rem;">Teacher Dashboard</h1>
+    <p style="color: var(--text-sub);">Department: {{ teacher.department.name }}</p>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 1.5rem;">Students in {{ teacher.department.name }}</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Courses & Grades</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td style="font-weight: 600;">{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>
+                        <ul style="list-style: none;">
+                        {% for enrollment in student.enrollments.all %}
+                            <li style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                                <span>{{ enrollment.course.name }} ({{ enrollment.course.code }})</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-weight: 600;">
+                                        {% if enrollment.marks %}{{ enrollment.marks }}%{% else %}N/A{% endif %}
+                                    </span>
+                                    <a href="{% url 'teacher:update_grade' enrollment.id %}" class="btn" style="padding: 0.25rem 0.5rem; background: #f1f5f9; font-size: 0.75rem; border: 1px solid var(--border);">Edit Grade</a>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li style="color: var(--text-sub); font-style: italic;">No enrollments</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 3rem; color: var(--text-sub);">
+                        No students found in your department.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

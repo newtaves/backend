@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}University Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{% url 'admission:index' %}" class="logo">UniPortal</a>
+                <ul class="nav-links">
+                    <li><a href="{% url 'admission:index' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'STUDENT' %}
+                            <li><a href="{% url 'student:dashboard' %}">My Dashboard</a></li>
+                        {% elif user.role == 'TEACHER' %}
+                            <li><a href="{% url 'teacher:dashboard' %}">Teacher Panel</a></li>
+                        {% endif %}
+                        <li>
+                            <form action="{% url 'logout' %}" method="post" style="display: var(--inline-block);">
+                                {% csrf_token %}
+                                <button type="submit" class="btn" style="padding: 0; background: none; color: var(--text-sub); font-weight: 500; font-family: inherit; transition: color 0.2s; cursor: pointer;">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'admission:apply' %}" class="btn btn-primary">Apply Now</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="card message-card {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="background-color: white; border-top: 1px solid var(--border); padding: 3rem 0; margin-top: auto;">
+        <div class="container" style="text-align: center; color: var(--text-sub);">
+            <p>&copy; 2026 UniPortal University. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
